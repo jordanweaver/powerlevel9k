@@ -26,7 +26,7 @@
 #   export DEFAULT_USER=<your username>
 #
 # Customize the format of the time segment. Example of reverse format:
-#   POWERLEVEL9K_TIME_FORMAT='%D{%S:%M:%H}' 
+#   POWERLEVEL9K_TIME_FORMAT='%D{%S:%M:%H}'
 #
 # Show the hash/changeset string in the `vcs` segment:
 #   POWERLEVEL9K_SHOW_CHANGESET=true
@@ -217,8 +217,8 @@ zstyle ':vcs_info:*' enable git hg
 zstyle ':vcs_info:*' check-for-changes true
 
 VCS_DEFAULT_FORMAT="$VCS_CHANGESET_PREFIX%F{$VCS_FOREGROUND_COLOR}%b%c%u%m%f"
-zstyle ':vcs_info:git:*' formats "%F{$VCS_FOREGROUND_COLOR}$VCS_GIT_ICON%f $VCS_DEFAULT_FORMAT" 
-zstyle ':vcs_info:hg:*' formats "%F{$VCS_FOREGROUND_COLOR}$VCS_HG_ICON%f $VCS_DEFAULT_FORMAT" 
+zstyle ':vcs_info:git:*' formats "%F{$VCS_FOREGROUND_COLOR}$VCS_GIT_ICON%f $VCS_DEFAULT_FORMAT"
+zstyle ':vcs_info:hg:*' formats "%F{$VCS_FOREGROUND_COLOR}$VCS_HG_ICON%f $VCS_DEFAULT_FORMAT"
 
 zstyle ':vcs_info:*' actionformats " %b %F{red}| %a%f"
 
@@ -252,7 +252,7 @@ fi
 # rendering default background/foreground.
 left_prompt_segment() {
   # Overwrite given background-color by user defined variable for this segment.
-  # We get as first Parameter the function name, which called this function. 
+  # We get as first Parameter the function name, which called this function.
   # From the given function name, we strip the "prompt_"-prefix and uppercase it.
   # This is, prefixed with "POWERLEVEL9K_" and suffixed with either "_BACKGROUND"
   # of "_FOREGROUND", our variable name. So each new Segment should automatically
@@ -422,7 +422,7 @@ CURRENT_BG='NONE'
 # AWS Profile
 prompt_aws() {
   local aws_profile="$AWS_DEFAULT_PROFILE"
-  if [[ -n "$aws_profile" ]]; 
+  if [[ -n "$aws_profile" ]];
   then
     $1_prompt_segment "$0" red white "$AWS_ICON $aws_profile"
   fi
@@ -602,8 +602,8 @@ powerlevel9k_init() {
   add-zsh-hook precmd vcs_info
 
   if [[ "$POWERLEVEL9K_PROMPT_ON_NEWLINE" == true ]]; then
-    PROMPT="╭─%{%f%b%k%}"'$(build_left_prompt)'" 
-╰─ "
+    PROMPT='%{%f%b%k%}$(build_left_prompt)
+  » '
     # The right prompt should be on the same line as the first line of the left
     # prompt.  To do so, there is just a quite ugly workaround: Before zsh draws
     # the RPROMPT, we advise it, to go one line up. At the end of RPROMPT, we
@@ -612,11 +612,11 @@ powerlevel9k_init() {
     RPROMPT_PREFIX='%{'$'\e[1A''%}' # one line up
     RPROMPT_SUFFIX='%{'$'\e[1B''%}' # one line down
   else
-    PROMPT="%{%f%b%k%}"'$(build_left_prompt)'
+    PROMPT='%{%f%b%k%}$(build_left_prompt)'
     RPROMPT_PREFIX=''
     RPROMPT_SUFFIX=''
   fi
-  RPROMPT=$RPROMPT_PREFIX"%{%f%b%k%}"'$(build_right_prompt)'"%{$reset_color%}"$RPROMPT_SUFFIX
+  RPROMPT=$RPROMPT_PREFIX'%{%f%b%k%}$(build_right_prompt)%{$reset_color%}'$RPROMPT_SUFFIX
 
 }
 
